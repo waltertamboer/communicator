@@ -17,9 +17,9 @@ interface RecipientInterface
     /**
      * Gets an array with addresses for the specific channel.
      *
-     * @param string $channel The channel for which a notification is sent.
+     * @param string $transport The name of the transport that is sending the message.
      * @param array $parameters Optional parameters that can be used to retrieve the information.
      * @return array
      */
-    public function getNotificationRecipientAddresses(string $channel, array $parameters): array;
+    public function getNotificationRecipientAddresses(string $transport, array $parameters): array;
 }
