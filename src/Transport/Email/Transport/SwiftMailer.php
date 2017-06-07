@@ -134,7 +134,7 @@ final class SwiftMailer implements TransportInterface
             $emailMessage->setTo($address);
             $emailMessage->setBody($text);
 
-            if ($this->getFromAddress()) {
+            if ($this->getFromAddress() !== null) {
                 $emailMessage->setFrom($this->getFromAddress(), $this->getFromName());
             }
 
