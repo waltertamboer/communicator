@@ -37,24 +37,6 @@ final class SwiftMailer extends AbstractTransport
     }
 
     /**
-     * Sends a message over the transport.
-     *
-     * @param array $recipients A list with all recipients that should receive the message.
-     * @param Message $message The message to send.
-     * @param string $subject The subject for this message.
-     * @param string $text The plain text template.
-     * @param null|string $html The HTML template.
-     * @return void
-     */
-    public function send(array $recipients, Message $message, string $subject, string $text, ?string $html): void
-    {
-        /** @var RecipientInterface $recipient */
-        foreach ($recipients as $recipient) {
-            $this->sendToRecipient($recipient, $message, $subject, $text, $html);
-        }
-    }
-
-    /**
      * Sends a message to the given recipient.
      *
      * @param RecipientInterface $recipient The recipient that should receive the message.
@@ -63,7 +45,7 @@ final class SwiftMailer extends AbstractTransport
      * @param string $text The plain text message.
      * @param null|string $html An optional HTML version of the message.
      */
-    private function sendToRecipient(
+    protected function sendToRecipient(
         RecipientInterface $recipient,
         Message $message,
         string $subject,

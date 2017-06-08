@@ -11,31 +11,29 @@ namespace Communicator\Transport\Email\Transport;
 
 use Communicator\Message;
 use Communicator\Recipient\RecipientInterface;
-use Zend\Mail\Message as ZendMessage;
-use Zend\Mail\Transport\TransportInterface;
-use Zend\Mime\Message as MimeMessage;
-use Zend\Mime\Part;
+use PHPMailer as PHPMailerInstance;
+use Swift_Message;
 
 /**
- * An e-mail transport that makes use of Zend\Mail.
+ * An e-mail transport that makes use of PHPMailer.
  */
-final class ZendMail extends AbstractTransport
+final class PHPMailer extends AbstractTransport
 {
     /**
      * The mailer used to send messages.
      *
-     * @var TransportInterface
+     * @var PHPMailerInstance
      */
-    private $transport;
+    private $mailer;
 
     /**
      * Initializes a new instance of this class.
      *
-     * @param TransportInterface $transport
+     * @param PHPMailerInstance $mailer
      */
-    public function __construct(TransportInterface $transport)
+    public function __construct(PHPMailerInstance $mailer)
     {
-        $this->transport = $transport;
+        $this->mailer = $mailer;
     }
 
     /**
@@ -57,31 +55,23 @@ final class ZendMail extends AbstractTransport
         $addresses = $this->getAddresses($recipient, $message);
 
         foreach ($addresses as $address) {
-            /** @var ZendMessage $emailMessage */
-            $emailMessage = new ZendMessage();
-            $emailMessage->setSubject($subject);
-            $emailMessage->setTo($address);
-            $emailMessage->setBody($text);
-            $emailMessage->setEncoding('UTF-8');
+            $phpMailer = clone $this->mailer;
+            $phpMailer->Subject = $subject;
+            $phpMailer->AddAddress($address, "First name last name");
 
             if ($this->getFromAddress() !== null) {
-                $emailMessage->setFrom($this->getFromAddress(), $this->getFromName());
+                $phpMailer->From = $this->getFromAddress();
+                $phpMailer->FromName = $this->getFromName();
             }
 
-            $textPart = new Part($text);
-            $textPart->type = 'text/plain';
-
-            $bodyPart = new MimeMessage();
-            $bodyPart->addPart($textPart);
-
-            if ($html) {
-                $htmlPart = new Part($html);
-                $htmlPart->type = 'text/html';
-
-                $bodyPart->addPart($htmlPart);
+            if ($html !== null) {
+                $phpMailer->Body = $html;
+                $phpMailer->AltBody = $text;
+            } else {
+                $phpMailer->Body = $text;
             }
 
-            $this->transport->send($emailMessage);
+            $phpMailer->send();
         }
     }
 }
