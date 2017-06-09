@@ -7,7 +7,7 @@
  * @license https://github.com/waltertamboer/communicator/blob/master/LICENSE.md MIT
  */
 
-namespace Communicator\Transport\Email\Transport;
+namespace Communicator\Transport\Email\Adapter;
 
 use Communicator\Message;
 use Communicator\Recipient\RecipientInterface;
@@ -19,7 +19,7 @@ use Zend\Mime\Part;
 /**
  * An e-mail transport that makes use of Zend\Mail.
  */
-final class ZendMail extends AbstractTransport
+final class ZendMail extends AbstractAdapter
 {
     /**
      * The mailer used to send messages.

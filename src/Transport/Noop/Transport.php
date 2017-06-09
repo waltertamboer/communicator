@@ -15,7 +15,7 @@ use Communicator\Transport\TransportInterface;
 /**
  * A no-operation transport.
  */
-class Transport implements TransportInterface
+final class Transport implements TransportInterface
 {
     /**
      * @var int

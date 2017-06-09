@@ -11,7 +11,7 @@ namespace Communicator\Transport\Email;
 
 use Communicator\Message;
 use Communicator\Transport\Email\Resolver\ResolverInterface;
-use Communicator\Transport\Email\Transport\TransportInterface;
+use Communicator\Transport\Email\Adapter\AdapterInterface;
 use PHPUnit\Framework\TestCase;
 
 final class TransportTest extends TestCase
@@ -19,7 +19,7 @@ final class TransportTest extends TestCase
     public function testSend()
     {
         // Arrange
-        $emailTransport = $this->getMockForAbstractClass(TransportInterface::class);
+        $emailTransport = $this->getMockForAbstractClass(AdapterInterface::class);
         $emailTransport->expects(static::once())->method('send');
 
         $templateResolver = $this->getMockForAbstractClass(ResolverInterface::class);

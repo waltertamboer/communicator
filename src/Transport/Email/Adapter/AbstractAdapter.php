@@ -7,7 +7,7 @@
  * @license https://github.com/waltertamboer/communicator/blob/master/LICENSE.md MIT
  */
 
-namespace Communicator\Transport\Email\Transport;
+namespace Communicator\Transport\Email\Adapter;
 
 use Communicator\Message;
 use Communicator\Recipient\RecipientInterface;
@@ -15,7 +15,7 @@ use Communicator\Recipient\RecipientInterface;
 /**
  * A base class for email transports.
  */
-abstract class AbstractTransport implements TransportInterface
+abstract class AbstractAdapter implements AdapterInterface
 {
     /**
      * The address used as a "from" address.

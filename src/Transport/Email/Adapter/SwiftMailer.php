@@ -7,7 +7,7 @@
  * @license https://github.com/waltertamboer/communicator/blob/master/LICENSE.md MIT
  */
 
-namespace Communicator\Transport\Email\Transport;
+namespace Communicator\Transport\Email\Adapter;
 
 use Communicator\Message;
 use Communicator\Recipient\RecipientInterface;
@@ -17,7 +17,7 @@ use Swift_Message;
 /**
  * An e-mail transport that makes use of Swift Mailer.
  */
-final class SwiftMailer extends AbstractTransport
+final class SwiftMailer extends AbstractAdapter
 {
     /**
      * The mailer used to send messages.

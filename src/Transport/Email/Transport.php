@@ -11,7 +11,7 @@ namespace Communicator\Transport\Email;
 
 use Communicator\Message;
 use Communicator\Transport\Email\Resolver\ResolverInterface;
-use Communicator\Transport\Email\Transport\TransportInterface as EmailTransportInterface;
+use Communicator\Transport\Email\Adapter\AdapterInterface;
 use Communicator\Transport\TransportInterface;
 
 /**
@@ -20,9 +20,9 @@ use Communicator\Transport\TransportInterface;
 class Transport implements TransportInterface
 {
     /**
-     * @var EmailTransportInterface
+     * @var AdapterInterface
      */
-    private $transport;
+    private $adapter;
 
     /**
      * @var ResolverInterface
@@ -32,12 +32,12 @@ class Transport implements TransportInterface
     /**
      * Initializes a new instance of this class.
      *
-     * @param EmailTransportInterface $transport
+     * @param AdapterInterface $adapter
      * @param ResolverInterface $resolver
      */
-    public function __construct(EmailTransportInterface $transport, ResolverInterface $resolver)
+    public function __construct(AdapterInterface $adapter, ResolverInterface $resolver)
     {
-        $this->transport = $transport;
+        $this->adapter = $adapter;
         $this->resolver = $resolver;
     }
 
@@ -55,6 +55,6 @@ class Transport implements TransportInterface
 
         $subject = $this->resolver->resolveSubject($message);
 
-        $this->transport->send($recipients, $message, $subject, $text, $html);
+        $this->adapter->send($recipients, $message, $subject, $text, $html);
     }
 }

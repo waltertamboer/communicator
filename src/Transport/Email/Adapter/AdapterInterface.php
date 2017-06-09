@@ -7,14 +7,14 @@
  * @license https://github.com/waltertamboer/communicator/blob/master/LICENSE.md MIT
  */
 
-namespace Communicator\Transport\Email\Transport;
+namespace Communicator\Transport\Email\Adapter;
 
 use Communicator\Message;
 
 /**
- * The interface that should be implemented by all transports.
+ * The interface that should be implemented by all adapters.
  */
-interface TransportInterface
+interface AdapterInterface
 {
     /**
      * Sends a message over the transport.
