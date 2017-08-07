@@ -55,12 +55,24 @@ final class ZendView implements ResolverInterface
     public function resolveSubject(Message $message): string
     {
         $channel = $message->getChannel();
+        $locale = $message->getOptions()['locale'];
 
         if (!array_key_exists($channel, $this->subjects)) {
             return '';
         }
 
-        return $this->subjects[$channel];
+        if (!array_key_exists($locale, $this->subjects[$channel])) {
+            return '';
+        }
+
+        $subject = $this->subjects[$channel][$locale];
+
+        // Only translate when the i18n module has been loaded
+        if (method_exists($this->renderer, 'translate')) {
+            $subject = $this->renderer->translate($subject);
+        }
+
+        return $subject;
     }
 
     /**
