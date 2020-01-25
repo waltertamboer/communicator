@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  composer:
+    image: docker.polderknowledge.nl/tools/php:composer-5.5
+    volumes:
+      - ./:/data/
+      - ~/.composer:/home/composer/.composer/
+      - ~/.ssh:/home/composer/.ssh/
+
+  front-end:
+    image: docker.polderknowledge.nl/tools/npm:3.5
+    volumes:
+      - ./:/data/
+      - ~/.ssh:/home/npm/.ssh/
+      - ~/.npm:/home/npm/.npm/
+    extra_hosts:
+      - "git.polderknowledge.nl:10.255.16.13"
+      - "git.redknot.nl:10.255.16.13"
+      - "git.youngguns.nl:10.255.16.13"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: "mysqlserver"
+      PMA_USER: "my_db"
+      PMA_PASSWORD: "password"
+    links:
+      - mysqlserver
