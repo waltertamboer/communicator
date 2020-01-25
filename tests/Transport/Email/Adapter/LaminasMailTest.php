@@ -12,15 +12,15 @@ namespace Communicator\Transport\Email\Adapter;
 use Communicator\Message;
 use Communicator\Recipient\RecipientInterface;
 use PHPUnit\Framework\TestCase;
-use Zend\Mail\Transport\TransportInterface;
+use Laminas\Mail\Transport\TransportInterface;
 
-final class ZendMailTest extends TestCase
+final class LaminasMailTest extends TestCase
 {
     public function testGetSetFromAddress()
     {
         // Arrange
         $mailTransport = $this->getMockForAbstractClass(TransportInterface::class);
-        $transport = new ZendMail($mailTransport);
+        $transport = new LaminasMail($mailTransport);
 
         // Act
         $transport->setFromAddress('from');
@@ -33,7 +33,7 @@ final class ZendMailTest extends TestCase
     {
         // Arrange
         $mailTransport = $this->getMockForAbstractClass(TransportInterface::class);
-        $transport = new ZendMail($mailTransport);
+        $transport = new LaminasMail($mailTransport);
 
         // Act
         $transport->setFromName('name');
@@ -48,7 +48,7 @@ final class ZendMailTest extends TestCase
         $mailTransport = $this->getMockForAbstractClass(TransportInterface::class);
         $mailTransport->expects(static::never())->method('send');
 
-        $transport = new ZendMail($mailTransport);
+        $transport = new LaminasMail($mailTransport);
 
         $message = new Message('channel', [], []);
 
@@ -70,7 +70,7 @@ final class ZendMailTest extends TestCase
         $mailTransport = $this->getMockForAbstractClass(TransportInterface::class);
         $mailTransport->expects(static::once())->method('send');
 
-        $transport = new ZendMail($mailTransport);
+        $transport = new LaminasMail($mailTransport);
         $transport->setFromAddress('test@email.com');
 
         $message = new Message('channel', [], []);

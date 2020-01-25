@@ -10,12 +10,12 @@
 namespace Communicator\Transport\Email\Resolver;
 
 use Communicator\Message;
-use Zend\View\Renderer\RendererInterface;
+use Laminas\View\Renderer\RendererInterface;
 
 /**
- * An e-mail resolver that uses Zend\View.
+ * An e-mail resolver that uses Laminas\View.
  */
-final class ZendView implements ResolverInterface
+final class LaminasView implements ResolverInterface
 {
     /**
      * @var RendererInterface

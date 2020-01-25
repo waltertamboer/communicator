@@ -11,15 +11,15 @@ namespace Communicator\Transport\Email\Adapter;
 
 use Communicator\Message;
 use Communicator\Recipient\RecipientInterface;
-use Zend\Mail\Message as ZendMessage;
-use Zend\Mail\Transport\TransportInterface;
-use Zend\Mime\Message as MimeMessage;
-use Zend\Mime\Part;
+use Laminas\Mail\Message as LaminasMessage;
+use Laminas\Mail\Transport\TransportInterface;
+use Laminas\Mime\Message as MimeMessage;
+use Laminas\Mime\Part;
 
 /**
- * An e-mail transport that makes use of Zend\Mail.
+ * An e-mail transport that makes use of Laminas\Mail.
  */
-final class ZendMail extends AbstractAdapter
+final class LaminasMail extends AbstractAdapter
 {
     /**
      * The mailer used to send messages.
@@ -57,8 +57,8 @@ final class ZendMail extends AbstractAdapter
         $addresses = $this->getAddresses($recipient, $message);
 
         foreach ($addresses as $address) {
-            /** @var ZendMessage $emailMessage */
-            $emailMessage = new ZendMessage();
+            /** @var LaminasMessage $emailMessage */
+            $emailMessage = new LaminasMessage();
             $emailMessage->setSubject($subject);
             $emailMessage->setTo($address);
             $emailMessage->setBody($text);

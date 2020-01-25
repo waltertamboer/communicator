@@ -29,12 +29,12 @@
         "php": "^7.1"
     },
     "require-dev": {
+        "laminas/laminas-mail": "^2.10",
+        "laminas/laminas-view": "^2.11",
         "phpmailer/phpmailer": "^5.2",
         "phpunit/phpunit": "^6.0",
         "squizlabs/php_codesniffer": "^3.0",
-        "swiftmailer/swiftmailer": "^6.0",
-        "zendframework/zend-mail": "^2.7",
-        "zendframework/zend-view": "^2.9"
+        "swiftmailer/swiftmailer": "^6.0"
     },
     "autoload": {
         "psr-4": {
@@ -57,10 +57,10 @@
         }
     },
     "suggest": {
+        "laminas/laminas-mail": "To send e-mails using Laminas\\Mail.",
+        "laminas/laminas-view": "To render e-mails using Laminas\\View.",
         "phpmailer/phpmailer": "To send e-mails using PHPMailer.",
-        "swiftmailer/swiftmailer": "To send e-mails using SwiftMailer.",
-        "zendframework/zend-mail": "To send e-mails using Zend\\Mail.",
-        "zendframework/zend-view": "To render e-mails using Zend\\View."
+        "swiftmailer/swiftmailer": "To send e-mails using SwiftMailer."
     },
     "config": {
         "optimize-autoloader": true,

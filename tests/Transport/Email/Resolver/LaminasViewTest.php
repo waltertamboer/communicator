@@ -11,9 +11,9 @@ namespace Communicator\Transport\Email\Resolver;
 
 use Communicator\Message;
 use PHPUnit\Framework\TestCase;
-use Zend\View\Renderer\RendererInterface;
+use Laminas\View\Renderer\RendererInterface;
 
-final class ZendViewTest extends TestCase
+final class LaminasViewTest extends TestCase
 {
     public function testResolveSubject()
     {
@@ -21,7 +21,7 @@ final class ZendViewTest extends TestCase
         $renderer = $this->getMockForAbstractClass(RendererInterface::class);
         $renderer->expects(static::never())->method('render');
 
-        $resolver = new ZendView($renderer, [], [
+        $resolver = new LaminasView($renderer, [], [
             'channel' => 'subject',
         ]);
 
@@ -40,7 +40,7 @@ final class ZendViewTest extends TestCase
         $renderer = $this->getMockForAbstractClass(RendererInterface::class);
         $renderer->expects(static::never())->method('render');
 
-        $resolver = new ZendView($renderer, [], []);
+        $resolver = new LaminasView($renderer, [], []);
 
         $message = new Message('channel', [], []);
 
@@ -57,7 +57,7 @@ final class ZendViewTest extends TestCase
         $renderer = $this->getMockForAbstractClass(RendererInterface::class);
         $renderer->expects(static::never())->method('render');
 
-        $resolver = new ZendView($renderer, [], []);
+        $resolver = new LaminasView($renderer, [], []);
 
         $message = new Message('channel', [], []);
 
@@ -74,7 +74,7 @@ final class ZendViewTest extends TestCase
         $renderer = $this->getMockForAbstractClass(RendererInterface::class);
         $renderer->expects(static::never())->method('render');
 
-        $resolver = new ZendView($renderer, [
+        $resolver = new LaminasView($renderer, [
             'channel' => [],
         ], []);
 
@@ -93,7 +93,7 @@ final class ZendViewTest extends TestCase
         $renderer = $this->getMockForAbstractClass(RendererInterface::class);
         $renderer->expects(static::never())->method('render');
 
-        $resolver = new ZendView($renderer, [
+        $resolver = new LaminasView($renderer, [
             'channel' => [
                 'en' => [],
             ],
@@ -116,7 +116,7 @@ final class ZendViewTest extends TestCase
         $renderer = $this->getMockForAbstractClass(RendererInterface::class);
         $renderer->expects(static::once())->method('render');
 
-        $resolver = new ZendView($renderer, [
+        $resolver = new LaminasView($renderer, [
             'channel' => [
                 'en' => [
                     'type' => '',
