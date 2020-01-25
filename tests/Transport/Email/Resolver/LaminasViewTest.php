@@ -22,6 +22,29 @@ final class LaminasViewTest extends TestCase
         $renderer->expects(static::never())->method('render');
 
         $resolver = new LaminasView($renderer, [], [
+            'channel' => [
+                'nl' => 'subject'
+            ],
+        ]);
+
+        $message = new Message('channel', [], [
+            'locale' => 'nl',
+        ]);
+
+        // Act
+        $result = $resolver->resolveSubject($message);
+
+        // Assert
+        static::assertEquals('subject', $result);
+    }
+
+    public function testResolveSubjectWithString()
+    {
+        // Arrange
+        $renderer = $this->getMockForAbstractClass(RendererInterface::class);
+        $renderer->expects(static::never())->method('render');
+
+        $resolver = new LaminasView($renderer, [], [
             'channel' => 'subject',
         ]);
 

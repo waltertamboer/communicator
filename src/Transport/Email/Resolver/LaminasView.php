@@ -61,6 +61,10 @@ final class LaminasView implements ResolverInterface
             return '';
         }
 
+        if (is_string($this->subjects[$channel])) {
+            return $this->subjects[$channel];
+        }
+
         if (!array_key_exists($locale, $this->subjects[$channel])) {
             return '';
         }
